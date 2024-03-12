@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Article generator</title>
+
+    <link rel="stylesheet" href="index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      mark {
+        background-color: yellow;
+        color: red;
+        font-weight: bold;
+      }
+      * {
+        margin: 0px;
+        padding: 0px;
+      }
+
+      .article {
+        background-color: rgb(236, 236, 236);
+        width: auto;
+        border-radius: 10px;
+        padding: 17px;
+      }
+
+      .article i:nth-of-type(1) {
+        font-size: 20px;
+        height: 10px;
+      }
+
+      .article i:nth-of-type(2) {
+        font-size: 20px;
+        position: absolute;
+        left: 90%;
+      }
+      a {
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">article.ai</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">Guide</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">Contact us</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-4">
+      <form class="row g-3" action="#" method="post">
+        <div class="col-md-10">
+          <label for="inputEmail4" class="form-label"
+            >Enter the prompt for article</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="inputEmail4"
+            name="name"
+          />
+        </div>
+        <div class="col-md-3">
+          <label for="inputState" class="form-label">Language</label>
+          <select id="inputState" class="form-select" name="language">
+            <option value="english">English</option>
+            <option value="tamil">Tamil</option>
+            <option value="hindi">Hindi</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label for="customRange3" class="form-label"
+            >Length of words (0% - 100%)</label
+          >
+          <input
+            type="range"
+            class="form-range"
+            min="0"
+            max="100"
+            step="10"
+            id="customRange3"
+          />
+        </div>
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck" />
+            <label class="form-check-label" for="gridCheck">
+              Agree to terms and conditions
+            </label>
+          </div>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">
+            Generate the article
+          </button>
+        </div>
+      </form>
+
+      <!-- article generator  -->
+
+      <div class="accordion mt-4" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseOne"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+            >
+              Extracted article
+            </button>
+          </h2>
+          <div
+            id="collapseOne"
+            class="accordion-collapse collapse show"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              <h5>
+                {{header}} <span class="badge bg-primary">{{category}}</span>
+              </h5>
+              <h6>-{{author}}</h6>
+              <hr />
+              <p id="paragraph">{{content1|safe}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item mt-4">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo"
+              aria-expanded="false"
+              aria-controls="collapseTwo"
+            >
+              summarized points
+            </button>
+          </h2>
+          <div
+            id="collapseTwo"
+            class="accordion-collapse collapse"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              <h5>
+                {{header}} <span class="badge bg-primary">{{category}}</span>
+              </h5>
+              <h6>-{{author}}</h6>
+              <hr />
+              <p id="paragraph">
+                தணித்து, பல ஆண்டுகளாக அதன் ஒரே சர்வதேச நுழைவாயிலாக உள்ளது.
+                மேலும் சர்வதேச விமானங்கள் வரும் என்று கூறி சுற்றுலா
+                உள்கட்டமைப்பை விரிவுபடுத்துமாறு அரசாங்கம் எங்களிடம் கேட்டுக்
+                கொண்டது. பிரகாசமான ஆரஞ்சு ஹோட்டல் கண்ணுக்கு எட்டிய தூரம் வரை
+                ஒட்டிக்கொண்டது ஆனால் துரதிர்ஷ்டவசமாக அதன் உரிமையாளர் பிஷ்ணு
+                ஷர்மாவைப் பார்க்க யாரும் இல்லை 1962ல் இந்தியா ஒரு அவமானகரமான
+                தோல்வியைச் சந்தித்தபோது இரு நாடுகளும் ஒரே ஒரு போரில் மட்டுமே
+                ஈடுபட்டுள்ளன. நான் இப்போது எனது கடனைத் திருப்பிச் செலுத்த
+                முடியாமல் தவித்து வருகிறேன் என்று திரு சர்மா பிபிசியிடம்
+                கூறுகிறார், அவர் மில்லியன் கணக்கான ரூபாய் கடனில் இருக்கிறார்.
+                இந்திய வான்வெளியை அணுகுவது குறுகிய விமானங்களைக் குறிக்கும்
+                குறைந்த செலவில். காத்மாண்டு விமான நிலையம் அதிக நெரிசல் மற்றும்
+                2015 இல் ஒரு சக்திவாய்ந்த நிலநடுக்கத்தால் சுருக்கமாக
+                மூடப்பட்டது. அணுவாயுத நாடுகள் இரு நாடுகளும் இழக்க வேண்டியது
+                அதிகம் என்பதால் பேச்சுவார்த்தைகள் மட்டுமே முன்னோக்கி செல்லும்
+                வழி என்று பார்வையாளர்கள் கூறுகின்றனர் .ஆனால் எனது ஹோட்டல்
+                மூன்றில் இரண்டு பங்கு காலியாக உள்ளது
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseThree"
+              aria-expanded="false"
+              aria-controls="collapseThree"
+            >
+              Abstractive Summary
+            </button>
+          </h2>
+          <div
+            id="collapseThree"
+            class="accordion-collapse collapse"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              <h5>
+                {{header}} <span class="badge bg-primary">{{category}}</span>
+              </h5>
+              <h6>-{{author}}</h6>
+              <hr />
+              <p>
+                சர்வதேச போக்குவரத்திற்காக திறக்கப்பட்ட டெர்மினல் ஏழு
+                மாதங்களுக்குப் பிறகு அருணாச்சலப் பிரதேசத்தில் கடந்த டிசம்பரில்
+                இரண்டு ஆசிய ராட்சத துருப்புக்களும் மோதிக்கொண்ட இடத்திலிருந்து
+                மேற்கே இந்தியாவின் நேபாள எல்லைக்கு அருகில் இந்த விமான நிலையம்
+                அமைந்துள்ளது. வளர்ச்சி அறக்கட்டளை மற்றும் கடந்த ஆண்டு மே மாதம்
+                திறக்கப்பட்ட கௌதம் புத்த சர்வதேச விமான நிலையத்தை கட்ட 76
+                மில்லியன் £ 61 மில்லியன் செலவழித்த போது இந்த எண்ணை அரசாங்கம்
+                பந்தயம் கட்டியது. ஆனால் நேபாள அதிகாரிகள் கூறுகையில், பெரிய
+                பயணிகள் விமானங்களை தனது வான்வெளியில் மேற்கு நோக்கி பறக்க
+                அனுமதிக்க டெல்லி மறுத்துவிட்டது. கௌதம் புத்தர் விமான நிலையத்தை
+                அடைய விமானங்கள் இந்தியாவின் மீது பறக்க முடியாது. வழக்கமான
+                சர்வதேச விமானங்கள் இல்லாமல் கடனைத் திருப்பிச் செலுத்துவது
+                கடினமாக இருக்கலாம் என்று நேபாளத்தின் சிவில் விமானப் போக்குவரத்து
+                ஆணையத்தின் முன்னாள் இயக்குநர் ஜெனரல் திரி ரத்ன மானந்தர்
+                கூறுகிறார். நேபாளத்தின் திறவுகோல் காத்மாண்டுவின் சுமையைத்
+                தணித்து, பல ஆண்டுகளாக அதன் ஒரே சர்வதேச நுழைவாயிலாக உள்ளது.
+                மேலும் சர்வதேச விமானங்கள் வரும் என்று கூறி சுற்றுலா
+                உள்கட்டமைப்பை விரிவுபடுத்துமாறு அரசாங்கம் எங்களிடம் கேட்டுக்
+                கொண்டது. பிரகாசமான ஆரஞ்சு ஹோட்டல் கண்ணுக்கு எட்டிய தூரம் வரை
+                ஒட்டிக்கொண்டது ஆனால் துரதிர்ஷ்டவசமாக அதன் உரிமையாளர் பிஷ்ணு
+                ஷர்மாவைப் பார்க்க யாரும் இல்லை 1962ல் இந்தியா ஒரு அவமானகரமான
+                தோல்வியைச் சந்தித்தபோது இரு நாடுகளும் ஒரே ஒரு போரில் மட்டுமே
+                ஈடுபட்டுள்ளன. நான் இப்போது எனது கடனைத் திருப்பிச் செலுத்த
+                முடியாமல் தவித்து வருகிறேன் என்று திரு சர்மா பிபிசியிடம்
+                கூறுகிறார், அவர் மில்லியன் கணக்கான ரூபாய் கடனில் இருக்கிறார்.
+                இந்திய வான்வெளியை அணுகுவது குறுகிய விமானங்களைக் குறிக்கும்
+                குறைந்த செலவில். காத்மாண்டு விமான நிலையம் அதிக நெரிசல் மற்றும்
+                2015 இல் ஒரு சக்திவாய்ந்த நிலநடுக்கத்தால் சுருக்கமாக
+                மூடப்பட்டது. அணுவாயுத நாடுகள் இரு நாடுகளும் இழக்க வேண்டியது
+                அதிகம் என்பதால் பேச்சுவார்த்தைகள் மட்டுமே முன்னோக்கி செல்லும்
+                வழி என்று பார்வையாளர்கள் கூறுகின்றனர் .ஆனால் எனது ஹோட்டல்
+                மூன்றில் இரண்டு பங்கு காலியாக உள்ளது
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br />
+      <h4>Recommended Article :</h4>
+      <div class="article">
+        <i class="fa-solid fa-book"></i>
+        <a href="/article" class="m-2"
+          >4 experts explain why Elon Musk's plan to colonize Mars is
+          'romanticized', not 'realistic', 'cosmic vandalism'
+        </a>
+        <span class="badge bg-primary">Science</span>
+        <i class="fa-solid fa-arrow-right-long"></i>
+        <p>
+          SpaceX founder Elon Musk said he plans to have a million people on
+          Mars by 2050. Scientists say that plan is admirable, but not
+          realistic.
+        </p>
+      </div>
+      <div class="article mt-2">
+        <i class="fa-solid fa-book"></i>
+        <a
+          href="https://slate.com/podcasts/what-next/2023/10/what-gavin-newsom-offered-laphonza-butler"
+          class="m-2"
+          >Dianne Feinsteinâ€™s Replacement Is Here. Who Is She?
+        </a>
+        <span class="badge bg-primary">Politics</span>
+        <i class="fa-solid fa-arrow-right-long"></i>
+        <p>
+          Is the ambitious governor threading the needle of his competing
+          promises?
+        </p>
+      </div>
+      <div class="article mt-2">
+        <i class="fa-solid fa-book"></i>
+        <a
+          href="https://cheezburger.com/22851589/we-probably-got-30-meals-free-friend-group-cheats-the-system-at-a-fast-food-chain-and-gets-a-massive"
+          class="m-2"
+          >'We probably got 30 meals free': Friend group cheats the system at a
+          fast-food chain and gets a massive haul of free food
+        </a>
+        <span class="badge bg-primary">Food</span>
+        <i class="fa-solid fa-arrow-right-long"></i>
+        <p>
+          Who doesn't love a good promo deal at a fast-food chain? The infamous
+          fofofo from Wendys was the only thing we ever ate in college. And who
+          can forget the epic Pizza Hut buffet back in the day? Legendary.Â 
+          Remember those Halloween days when you'd throw on a â€¦
+        </p>
+      </div>
+      <div class="article mt-2">
+        <i class="fa-solid fa-book"></i>
+        <a href="#" class="m-2"
+          >Google settles with Match, but Epic still intends to go to trial
+        </a>
+        <span class="badge bg-primary">Sports</span>
+        <i class="fa-solid fa-arrow-right-long"></i>
+        <p>
+          Google has concluded its antitrust lawsuit with Match, but Epic Games
+          remains adamant about proceeding with its case.
+        </p>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("loading-bar").style.display = "block";
+      });
+
+      // Hide the loading bar when the page has finished loading
+      window.addEventListener("load", function () {
+        document.getElementById("loading-bar").style.display = "none";
+      });
+    </script>
+  </body>
+</html>
